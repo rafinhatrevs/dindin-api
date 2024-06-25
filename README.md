@@ -36,8 +36,8 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 - **transacoes.js:** Controlador responsável por lidar com as transações de cada usuário.
   
 #### intermediários/:
-- **validacaoLogin:** Intermediário para autenticar o login do usuário antes de executar operações.
-- **validacaoDados:** Intermediário para validação de preenchimento obrigatório de dados. 
+- **validacaoLogin.js:** Intermediário para autenticar o login do usuário antes de executar operações.
+- **validacaoDados.js:** Intermediário para validação de preenchimento obrigatório de dados. 
 
 #### sql/: 
 - **estrutura.sql:** Estrutura do banco de dados e suas tabelas.
