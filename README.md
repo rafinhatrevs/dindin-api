@@ -2,7 +2,7 @@
 Desafio DDS M03 - API Dindin
 
 <p align="center">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/rafinhatrevs/digital-bank-api">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/rafinhatrevs/dindin-api">
   
   <a href="https://github.com/rafinhatrevs/dindin-api/commits/main/">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/rafinhatrevs/dindin-api">
