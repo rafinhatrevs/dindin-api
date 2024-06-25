@@ -24,52 +24,51 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ###  💻 Estrutura do Projeto
 
-- **:** 
-- **:** 
-- **:** 
-- **:** 
+- **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
+- **rotas.js:** Arquivo que contém as definições das rotas da API.
+- **conexao.js:** Arquivo de configuração da conexão com o banco de dados PostgreSQL utilizando pool de conexões.
+- **configs.js:** Arquivo de configuração que armazena dados sensíveis e de configuração.
   
 #### controladores/:
-- **:** 
-- **:** 
-- **:** 
-- **:** 
-- **:** 
+- **usuarios.js:** Controlador responsável por lidar com operações relacionadas aos usuários, como cadastrar, detalhar e atualizar usuários. 
+- **login.js:** Controlador responsável pelo login de usuários. 
+- **categorias.js:** Controlador responsável por listar todas as categorias cadastradas.
+- **transacoes.js:** Controlador responsável por lidar com as transações de cada usuário.
   
 #### intermediários/:
-- **:** 
-- **:** 
-- **:** 
+- **validacaoLogin:** Intermediário para autenticar o login do usuário antes de executar operações.
+- **validacaoDados:** Intermediário para validação de preenchimento obrigatório de dados. 
 
 #### sql/: 
-- **:** 
+- **estrutura.sql:** Estrutura do banco de dados e suas tabelas.
+- **categorias.sql:** Inserção de dados na tabela categorias. 
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
 ### ⚙️ Funcionalidades
 
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
-- **:** `` ``  
-  
+- **Cadastrar Usuário:** `POST` `/usuarios`  
+  Endpoint para cadastrar um novo usuário.
+- **Login de Usuário:** `POST` `/login`  
+  Endpoint para efetuar o login do usuário.
+- **Detalhar Usuário:** `GET` `/usuarios`   
+  Endpoint para detalhar o usuário logado.
+- **Atualizar Usuário:** `PUT` `/usuarios`  
+  Endpoint para atualizar o usuário logado.
+- **Listar Categorias:** `GET` `/categorias`   
+  Endpoint para que o usuário logado consiga listar todas as categorias cadastradas.
+- **Cadastrar Transação:** `POST` `/transacoes`     
+  Endpoint para cadastrar uma transação para o usuário logado.
+- **Listar Transações:** `GET` `/transacoes`  
+  Endpoint para listar todas as transações do usuário logado.
+- **Extrato:** `GET` `/transacoes/extrato`  
+  Endpoint para obter o extrato de transações do usuário logado.
+- **Detalhar Transação:** `GET` `/transacoes/:id`  
+  Endpoint para detalhar uma transação do usuário logado.
+- **Atualizar Transação:** `PUT` `/transacoes/:id`  
+  Endpoint para atualizar uma transação do usuário logado.
+- **Excluir Transação:** `DELETE` `/transacoes/:id`  
+  Endpoint para excluir uma transação do usuário logado.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
