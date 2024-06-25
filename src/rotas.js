@@ -13,24 +13,24 @@ const { cadastrarTransacao, listarTransacoes, detalharTransacao, atualizarTransa
 
 const rotas = express();
 
-rotas.post('/usuario', dadosUsuario, cadastrarUsuario);
+rotas.post('/usuarios', dadosUsuario, cadastrarUsuario);
 rotas.post('/login', dadosLogin, login);
 
 rotas.use(validarLogin);
 
 // rotas usuarios
-rotas.get('/usuario', detalharUsuario);
-rotas.put('/usuario', dadosUsuario, atualizarUsuario);
+rotas.get('/usuarios', detalharUsuario);
+rotas.put('/usuarios', dadosUsuario, atualizarUsuario);
 
 // rotas categorias
-rotas.get('/categoria', listarCategorias);
+rotas.get('/categorias', listarCategorias);
 
 // rotas transacoes
-rotas.post('/transacao', dadosTransacao, cadastrarTransacao);
-rotas.get('/transacao', listarTransacoes);
-rotas.get('/transacao/extrato', obterExtrato);
-rotas.get('/transacao/:id', detalharTransacao);
-rotas.put('/transacao/:id', dadosTransacao, atualizarTransacao);
-rotas.delete('/transacao/:id', excluirTransacao);
+rotas.post('/transacoes', dadosTransacao, cadastrarTransacao);
+rotas.get('/transacoes', listarTransacoes);
+rotas.get('/transacoes/extrato', obterExtrato);
+rotas.get('/transacoes/:id', detalharTransacao);
+rotas.put('/transacoes/:id', dadosTransacao, atualizarTransacao);
+rotas.delete('/transacoes/:id', excluirTransacao);
 
 module.exports = rotas;
