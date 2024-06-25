@@ -144,7 +144,9 @@ const obterExtrato = async (req, res) => {
     try {
         const tipos = ['entrada', 'saida'];
 
-        const entradas = await pool.query(`SELECT valor FROM transacoes WHERE tipo = $1`, [tipos[0]]);
+        const idUsuario = req.usuario.id;
+
+        const entradas = await pool.query(`SELECT valor FROM transacoes WHERE tipo = $1 AND usuario_id = $2`, [tipos[0], idUsuario]);
         let somaEntradas = 0;
 
         if (entradas.rowCount !== 0) {
@@ -153,7 +155,7 @@ const obterExtrato = async (req, res) => {
             }
         }
 
-        const saidas = await pool.query(`SELECT valor FROM transacoes WHERE tipo = $1`, [tipos[1]]);
+        const saidas = await pool.query(`SELECT valor FROM transacoes WHERE tipo = $1 AND usuario_id = $2`, [tipos[1], idUsuario]);
         let somaSaidas = 0;
 
         if (saidas.rowCount !== 0) {

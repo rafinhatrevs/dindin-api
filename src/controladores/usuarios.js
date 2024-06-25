@@ -33,7 +33,7 @@ const detalharUsuario = async (req, res) => {
     try {
         const idUsuario = req.usuario.id;
 
-        const { rowCount } = await pool.query(`SELECT * FROM usuarios WHERE id = $1`, [idUsuario]);
+        const { rows, rowCount } = await pool.query(`SELECT * FROM usuarios WHERE id = $1`, [idUsuario]);
 
         if (rowCount === 0) {
             return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
