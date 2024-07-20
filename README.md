@@ -2,7 +2,7 @@
 Desafio DDS M03 - API Dindin
 
 <p align="center">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/rafinhatrevs/digital-bank-api">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/rafinhatrevs/dindin-api">
   
   <a href="https://github.com/rafinhatrevs/dindin-api/commits/main/">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/rafinhatrevs/dindin-api">
@@ -36,8 +36,8 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 - **transacoes.js:** Controlador responsável por lidar com as transações de cada usuário.
   
 #### intermediários/:
-- **validacaoLogin:** Intermediário para autenticar o login do usuário antes de executar operações.
-- **validacaoDados:** Intermediário para validação de preenchimento obrigatório de dados. 
+- **validacaoLogin.js:** Intermediário para autenticar o login do usuário antes de executar operações.
+- **validacaoDados.js:** Intermediário para validação de preenchimento obrigatório de dados. 
 
 #### sql/: 
 - **estrutura.sql:** Estrutura do banco de dados e suas tabelas.
@@ -106,74 +106,68 @@ $ npm run dev
 ```
 
 <p align="center">
-  <a href="https://insomnia.rest/run/?label=&uri=https%3A%2F%2Fraw.githubusercontent.com%2Frafinhatrevs%2Fdigital-bank-api-insomnia%2Fmain%2FInsomnia_2024-06-23.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://insomnia.rest/run/?label=&uri=https://raw.githubusercontent.com/rafinhatrevs/dindin-api-insomnia/main/Insomnia_2024-06-25.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 #### Exemplos de requisições (Body JSON)
 
 ```javascript
 
-// 
+// POST /usuarios
 {
-	
+	"nome": "nome",
+	"email": "nome@email.com",
+	"senha": "123456"
 }
 
 ```
 
 ```javascript
 
-// 
+// POST /login
 {
-	
+	"email": "nome@email.com",
+	"senha": "123456"
 }
 
 ```
 
 ```javascript
 
-// 
+// PUT /usuarios
 {
-	
+	"nome": "nome",
+	"email": "nome@email.com",
+	"senha": "123456"
 }
 
 ```
 
 ```javascript
 
-//
+// POST /transacoes
 {
-	
+	"descricao": "Pets",
+	"valor": 10000,
+	"data": "2024-06-25",
+	"categoria_id": 9,
+	"tipo": "saida"
 }
 
 ```
 
 ```javascript
 
-// 
+// PUT /transacoes
 {
-
+	"descricao": "Salário",
+	"valor": 300000,
+	"data": "2024-06-25",
+	"categoria_id": 14,
+	"tipo": "entrada",
 }
 
 ```
-
-```javascript
-
-// 
-{
-	
-}
-
-```
-
-```javascript
-
-//
-{
-	
-}
-
-```
-
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
