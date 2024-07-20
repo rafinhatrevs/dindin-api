@@ -1,21 +1,18 @@
-const pool = require('../conexao');
+const knex = require('../conexao');
 
 const cadastrarTransacao = async (req, res) => {
     const { descricao, valor, data, categoria_id, tipo } = req.body;
 
     try {
-        const { rowCount } = await pool.query(`SELECT * FROM categorias WHERE id = $1`, [categoria_id]);
+        const categoria = await knex('categorias').where('id', categoria_id).first();
 
-        if (rowCount === 0) {
+        if (!categoria) {
             return res.status(404).json({ mensagem: 'Categoria não encontrada.' });
         }
 
         const idUsuario = req.usuario.id;
 
-        const { rows } = await pool.query(`INSERT INTO transacoes (descricao, valor, data, categoria_id, tipo, usuario_id)
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [descricao, valor, data, categoria_id, tipo, idUsuario]);
-
-        const transacao = rows[0];
+        const transacao = await knex('transacoes').insert({ descricao, valor, data, categoria_id, tipo, usuario_id: idUsuario }).returning('*');
 
         return res.status(201).json(transacao);
 
@@ -29,9 +26,7 @@ const listarTransacoes = async (req, res) => {
     try {
         const idUsuario = req.usuario.id;
 
-        const { rows } = await pool.query(`SELECT * FROM transacoes WHERE usuario_id = $1`, [idUsuario]);
-
-        const transacoes = rows;
+        const transacoes = await knex('transacoes').where('usuario_id', idUsuario);
 
         return res.status(200).json(transacoes);
 
@@ -45,13 +40,11 @@ const detalharTransacao = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const { rows, rowCount } = await pool.query(`SELECT * FROM transacoes WHERE id = $1`, [id]);
+        const transacao = await knex('transacoes').where('id', id).first();
 
-        if (rowCount === 0) {
+        if (!transacao) {
             return res.status(404).json({ mensagem: 'Transação não encontrada.' });
         }
-
-        const transacao = rows[0];
 
         const idUsuario = req.usuario.id;
 
@@ -72,13 +65,11 @@ const atualizarTransacao = async (req, res) => {
     const { descricao, valor, data, categoria_id, tipo } = req.body;
 
     try {
-        const { rows, rowCount } = await pool.query(`SELECT * FROM transacoes WHERE id = $1`, [id]);
+        const transacao = await knex('transacoes').where('id', id).first();
 
-        if (rowCount === 0) {
+        if (!transacao) {
             return res.status(404).json({ mensagem: 'Transação não encontrada.' });
         }
-
-        const transacao = rows[0];
 
         const idUsuario = req.usuario.id;
 
@@ -86,23 +77,21 @@ const atualizarTransacao = async (req, res) => {
             return res.status(401).json({ mensagem: 'Transação não pertence ao usuário logado.' });
         }
 
-        const categoria = await pool.query(`SELECT * FROM categorias WHERE id = $1`, [categoria_id]);
+        const categoria = await knex('categorias').where('id', categoria_id).first();
 
-        if (categoria.rowCount === 0) {
+        if (!categoria) {
             return res.status(404).json({ mensagem: 'Categoria não encontrada.' });
         }
 
-        await pool.query(`
-        UPDATE
-         transacoes 
-        SET
-          descricao = $1,
-          valor = $2,
-          data = $3,
-          categoria_id = $4,
-          tipo = $5
-        WHERE
-          id = $6`, [descricao, valor, data, categoria_id, tipo, id]);
+        const novaTransacao = {
+            descricao,
+            valor,
+            data,
+            categoria_id,
+            tipo
+        };
+
+        await knex('transacoes').where('id', id).update(novaTransacao);
 
         return res.status(204).send();
 
@@ -116,13 +105,11 @@ const excluirTransacao = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const { rows, rowCount } = await pool.query(`SELECT * FROM transacoes WHERE id = $1`, [id]);
+        const transacao = await knex('transacoes').where('id', id).first();
 
-        if (rowCount === 0) {
+        if (!transacao) {
             return res.status(404).json({ mensagem: 'Transação não encontrada.' });
         }
-
-        const transacao = rows[0];
 
         const idUsuario = req.usuario.id;
 
@@ -130,7 +117,7 @@ const excluirTransacao = async (req, res) => {
             return res.status(401).json({ mensagem: 'Transação não pertence ao usuário logado.' });
         }
 
-        await pool.query(`DELETE FROM transacoes WHERE id = $1`, [id]);
+        await knex('transacoes').where('id', id).delete();
 
         return res.status(204).send();
 
@@ -146,20 +133,20 @@ const obterExtrato = async (req, res) => {
 
         const idUsuario = req.usuario.id;
 
-        const entradas = await pool.query(`SELECT valor FROM transacoes WHERE tipo = $1 AND usuario_id = $2`, [tipos[0], idUsuario]);
+        const entradas = await knex('transacoes').where('tipo', tipos[0]).andWhere('usuario_id', idUsuario);
         let somaEntradas = 0;
 
-        if (entradas.rowCount !== 0) {
-            for (const entrada of entradas.rows) {
+        if (entradas) {
+            for (const entrada of entradas) {
                 somaEntradas += entrada.valor;
             }
         }
 
-        const saidas = await pool.query(`SELECT valor FROM transacoes WHERE tipo = $1 AND usuario_id = $2`, [tipos[1], idUsuario]);
+        const saidas = await knex('transacoes').where('tipo', tipos[1]).andWhere('usuario_id', idUsuario);
         let somaSaidas = 0;
 
-        if (saidas.rowCount !== 0) {
-            for (const saida of saidas.rows) {
+        if (saidas) {
+            for (const saida of saidas) {
                 somaSaidas += saida.valor;
             }
         }

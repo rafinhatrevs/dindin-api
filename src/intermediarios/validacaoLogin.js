@@ -1,6 +1,5 @@
-const pool = require('../conexao');
+const knex = require('../conexao');
 const jwt = require('jsonwebtoken');
-const config = require('../configs');
 
 const validarLogin = async (req, res, next) => {
     const { authorization } = req.headers;
@@ -12,15 +11,13 @@ const validarLogin = async (req, res, next) => {
     const token = authorization.split(' ')[1];
 
     try {
-        const { id } = jwt.verify(token, config.jwtSecret);
+        const { id } = jwt.verify(token, process.env.JWT_SECRET);
 
-        const { rows, rowCount } = await pool.query(`SELECT * FROM usuarios WHERE id = $1`, [id]);
+        const usuario = await knex('usuarios').where('id', id).first();
 
-        if (rowCount === 0) {
+        if (!usuario) {
             return res.status(401).json({ mensagem: 'Para acessar este recurso um token de autenticação válido deve ser enviado.' });
         }
-
-        const usuario = rows[0];
 
         req.usuario = usuario;
 

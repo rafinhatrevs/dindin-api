@@ -10,12 +10,15 @@ const { cadastrarUsuario, detalharUsuario, atualizarUsuario } = require('./contr
 const { listarCategorias } = require('./controladores/categorias');
 const { cadastrarTransacao, listarTransacoes, detalharTransacao, atualizarTransacao, excluirTransacao, obterExtrato } = require('./controladores/transacoes');
 
-
 const rotas = express();
 
+// cadastrar usuario
 rotas.post('/usuarios', dadosUsuario, cadastrarUsuario);
+
+// login
 rotas.post('/login', dadosLogin, login);
 
+// validacao de login
 rotas.use(validarLogin);
 
 // rotas usuarios

@@ -26,8 +26,8 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 - **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
 - **rotas.js:** Arquivo que contém as definições das rotas da API.
-- **conexao.js:** Arquivo de configuração da conexão com o banco de dados PostgreSQL utilizando pool de conexões.
-- **configs.js:** Arquivo de configuração que armazena dados sensíveis e de configuração.
+- **conexao.js:** Arquivo de configuração da conexão com o banco de dados PostgreSQL utilizando knex.
+- **.env:** Arquivo que armazena dados sensíveis.
   
 #### controladores/:
 - **usuarios.js:** Controlador responsável por lidar com operações relacionadas aos usuários, como cadastrar, detalhar e atualizar usuários. 
@@ -186,6 +186,8 @@ $ npm run dev
 - **Beekeeper Studio:** Ferramenta GUI multiplataforma para gerenciar bancos de dados.
 - **bcrypt:** Função de hashing criptográfico utilizada para armazenar senhas de forma segura em bancos de dados.
 - **jsonwebtoken:** Implementação de tokens JWT (JSON Web Tokens) para autenticação segura entre partes.
+- **knex.js:** Biblioteca SQL query builder para Node.js que facilita a construção de consultas e migrações de banco de dados.
+- **dotenv:** Módulo para carregar variáveis de ambiente de um arquivo .env para process.env, ajudando na configuração segura de aplicações.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
