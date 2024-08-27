@@ -24,20 +24,22 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ###  💻 Estrutura do Projeto
 
+- **example.env:** Arquivo que exemplifica variáveis de ambiente para armazenamento de dados sensíveis.
+
+#### src/:
 - **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
 - **rotas.js:** Arquivo que contém as definições das rotas da API.
 - **conexao.js:** Arquivo de configuração da conexão com o banco de dados PostgreSQL utilizando knex.
-- **.env:** Arquivo que armazena dados sensíveis.
+
+	#### controladores/:
+	- **usuarios.js:** Controlador responsável por lidar com operações relacionadas aos usuários, como cadastrar, detalhar e atualizar usuários. 
+	- **login.js:** Controlador responsável pelo login de usuários. 
+	- **categorias.js:** Controlador responsável por listar todas as categorias cadastradas.
+	- **transacoes.js:** Controlador responsável por lidar com as transações de cada usuário.
   
-#### controladores/:
-- **usuarios.js:** Controlador responsável por lidar com operações relacionadas aos usuários, como cadastrar, detalhar e atualizar usuários. 
-- **login.js:** Controlador responsável pelo login de usuários. 
-- **categorias.js:** Controlador responsável por listar todas as categorias cadastradas.
-- **transacoes.js:** Controlador responsável por lidar com as transações de cada usuário.
-  
-#### intermediários/:
-- **validacaoLogin.js:** Intermediário para autenticar o login do usuário antes de executar operações.
-- **validacaoDados.js:** Intermediário para validação de preenchimento obrigatório de dados. 
+	#### intermediários/:
+	- **validacaoLogin.js:** Intermediário para autenticar o login do usuário antes de executar operações.
+	- **validacaoDados.js:** Intermediário para validação de preenchimento obrigatório de dados. 
 
 #### sql/: 
 - **estrutura.sql:** Estrutura do banco de dados e suas tabelas.
@@ -81,7 +83,6 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 1. [Git](https://git-scm.com)
 2. [Node.js](https://nodejs.org/en/)
 3. [PostgreSQL](https://www.postgresql.org/)
-4. [Beekeeper Studio](https://www.beekeeperstudio.io/)
    
 **Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/).**
 
@@ -177,7 +178,6 @@ $ npm run dev
 - **Express.js:** Framework web para Node.js utilizado para criar a API RESTful.
 - **Nodemon:** Utilitário que monitora as alterações nos arquivos e reinicia automaticamente o servidor quando necessário.
 - **PostgreSQL:** Sistema de gerenciamento de banco de dados relacional open-source.
-- **Beekeeper Studio:** Ferramenta GUI multiplataforma para gerenciar bancos de dados.
 - **bcrypt:** Função de hashing criptográfico utilizada para armazenar senhas de forma segura em bancos de dados.
 - **jsonwebtoken:** Implementação de tokens JWT (JSON Web Tokens) para autenticação segura entre partes.
 - **knex.js:** Biblioteca SQL query builder para Node.js que facilita a construção de consultas e migrações de banco de dados.
